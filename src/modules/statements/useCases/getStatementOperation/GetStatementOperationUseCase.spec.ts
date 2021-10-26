@@ -56,28 +56,6 @@ describe('Get Statement Operation', () => {
     expect(statementOperation).toEqual(expect.objectContaining(deposit));
   });
 
-  it('should not be able to show a statement operation with a non-existent user', async () => {
-    expect(async () => {
-      const user = await createUserUseCase.execute({
-        name: 'User name',
-        email: 'user@ignite.com',
-        password: 'password',
-      });
-
-      const deposit = await createStatementUseCase.execute({
-        user_id: user.id as string,
-        type: OperationType.DEPOSIT,
-        amount: 100,
-        description: 'Deposit description',
-      });
-
-      await getStatementOperationUseCase.execute({
-        user_id: 'Another user id',
-        statement_id: deposit.id as string,
-      });
-    }).rejects.toBeInstanceOf(AppError);
-  });
-
   it('should not be able to show a non-existent statement operation', async () => {
     expect(async () => {
       const user = await createUserUseCase.execute({
@@ -96,6 +74,28 @@ describe('Get Statement Operation', () => {
       await getStatementOperationUseCase.execute({
         user_id: user.id as string,
         statement_id: 'Another statement id',
+      });
+    }).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should not be able to show a statement operation with a non-existent user', async () => {
+    expect(async () => {
+      const user = await createUserUseCase.execute({
+        name: 'User name',
+        email: 'user@ignite.com',
+        password: 'password',
+      });
+
+      const deposit = await createStatementUseCase.execute({
+        user_id: user.id as string,
+        type: OperationType.DEPOSIT,
+        amount: 100,
+        description: 'Deposit description',
+      });
+
+      await getStatementOperationUseCase.execute({
+        user_id: 'Another user id',
+        statement_id: deposit.id as string,
       });
     }).rejects.toBeInstanceOf(AppError);
   });

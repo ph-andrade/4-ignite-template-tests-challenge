@@ -9,7 +9,7 @@ enum OperationType {
 }
 
 export class CreateStatementController {
-  async execute(request: Request, response: Response) {
+  async execute(request: Request, response: Response): Promise<Response> {
     const { id: user_id } = request.user;
     const { amount, description } = request.body;
 

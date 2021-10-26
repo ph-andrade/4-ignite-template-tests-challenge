@@ -4,7 +4,7 @@ import { container } from 'tsyringe';
 import { GetStatementOperationUseCase } from './GetStatementOperationUseCase';
 
 export class GetStatementOperationController {
-  async execute(request: Request, response: Response) {
+  async execute(request: Request, response: Response): Promise<Response> {
     const { id: user_id } = request.user;
     const { statement_id } = request.params;
 
