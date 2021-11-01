@@ -10,7 +10,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=queries_challenge
+      - POSTGRES_DB=fin_api
     volumes:
       - pgdata:/data/postgres
 volumes:

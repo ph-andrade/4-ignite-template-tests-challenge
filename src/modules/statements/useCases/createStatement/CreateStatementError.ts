@@ -12,4 +12,10 @@ export namespace CreateStatementError {
       super('Insufficient funds', 400);
     }
   }
+
+  export class RecipientNotInformed extends AppError {
+    constructor() {
+      super('Recipient not informed', 400);
+    }
+  }
 }
